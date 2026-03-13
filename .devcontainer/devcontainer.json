@@ -1,0 +1,30 @@
+{
+  "name": "Playwright TypeScript Dev Container",
+  "image": "mcr.microsoft.com/playwright:latest",
+  "forwardPorts": [9323],
+  "portsAttributes": {
+    "9323": {
+      "label": "Playwright UI",
+      "onAutoForward": "notify"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-playwright.playwright"
+      ],
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
+        "typescript.tsdk": "node_modules/typescript/lib"
+      }
+    }
+  },
+  "postCreateCommand": "npm install -g pnpm && pnpm install",
+  "remoteUser": "pwuser"
+}
