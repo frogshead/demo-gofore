@@ -60,6 +60,13 @@ pnpm exec playwright test --project=chromium
 Build and run tests inside the official Playwright container:
 
 ```bash
+# bash/zsh
+docker build -t demo-gofore .
+docker run --rm demo-gofore
+```
+
+```nu
+# Nushell
 docker build -t demo-gofore .
 docker run --rm demo-gofore
 ```
@@ -67,10 +74,16 @@ docker run --rm demo-gofore
 Mount report directories to retrieve results locally:
 
 ```bash
+# bash/zsh
 docker run --rm \
   -v $(pwd)/playwright-report:/app/playwright-report \
   -v $(pwd)/test-results:/app/test-results \
   demo-gofore
+```
+
+```nu
+# Nushell — (pwd) instead of $(pwd)
+docker run --rm -v $"(pwd)/playwright-report:/app/playwright-report" -v $"(pwd)/test-results:/app/test-results" demo-gofore
 ```
 
 A pre-built image is published to GitHub Container Registry on every push to `main`:
