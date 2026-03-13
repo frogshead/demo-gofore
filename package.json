@@ -5,6 +5,7 @@
   "packageManager": "pnpm@latest",
   "scripts": {
     "test": "playwright test",
+    "test:firefox": "playwright test --project=firefox",
     "test:headed": "playwright test --headed",
     "test:ui": "playwright test --ui",
     "lint": "eslint . --ext .ts",
