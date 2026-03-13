@@ -6,6 +6,7 @@
   "scripts": {
     "test": "playwright test",
     "test:firefox": "playwright test --project=firefox",
+    "test:firefox:headed": "playwright test --project=firefox --headed",
     "test:headed": "playwright test --headed",
     "test:ui": "playwright test --ui",
     "lint": "eslint . --ext .ts",
