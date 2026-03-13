@@ -90,4 +90,50 @@ Two GitHub Actions workflows run on every push and pull request to `main`:
 
 ## Dev container
 
-A `.devcontainer` configuration is included for VS Code / GitHub Codespaces. It uses the same Playwright image and forwards port `9323` for the interactive UI (`pnpm test:ui`).
+The `.devcontainer` setup gives you a fully configured Playwright environment inside VS Code without installing Node, pnpm, or any browsers locally.
+
+### Requirements
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) running
+- VS Code with the [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension installed
+
+### Opening the project in a container
+
+1. Open the repo folder in VS Code
+2. VS Code detects `.devcontainer/devcontainer.json` and shows a popup — click **Reopen in Container**
+   - Alternatively: open the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`) → **Dev Containers: Reopen in Container**
+3. VS Code pulls `mcr.microsoft.com/playwright:latest`, starts the container, and runs `pnpm install` automatically
+4. The workspace opens inside the container — all terminals, tasks, and extensions run there
+
+### What's pre-installed
+
+| Thing | Detail |
+|---|---|
+| Playwright + all browsers | Bundled in the base image — no separate `npx playwright install` needed |
+| Node.js & pnpm | Installed automatically via `postCreateCommand` |
+| ESLint extension | Inline lint errors as you type |
+| Prettier extension | Format on save, using project `.prettierrc` |
+| Playwright Test for VS Code | Run and debug individual tests from the Test Explorer sidebar |
+| TypeScript SDK | Pointed at `node_modules/typescript/lib` for accurate type checking |
+
+### Running tests from inside the container
+
+Use the integrated terminal (`` Ctrl+` ``) or the Playwright Test panel in the sidebar.
+
+```bash
+pnpm test                          # run all tests headlessly
+pnpm exec playwright test tests/smoke/homepage.spec.ts   # single file
+pnpm exec playwright test --project=chromium             # single browser
+```
+
+### Playwright interactive UI
+
+```bash
+pnpm test:ui
+```
+
+This starts the Playwright UI server on port `9323`. The dev container forwards that port automatically — VS Code shows a notification with an **Open in Browser** link, or you can open `http://localhost:9323` directly. From the UI you can filter, run, and time-travel debug individual tests.
+
+### Headed mode (GUI browser)
+
+Headed mode requires a display server, which is not available inside the container by default. For visual debugging, use `pnpm test:ui` (browser-in-browser) instead, or run headed tests on your host machine outside the container.
