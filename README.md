@@ -47,6 +47,23 @@ Run a single browser only:
 pnpm exec playwright test --project=chromium
 ```
 
+Firefox shortcuts:
+
+```bash
+pnpm test:firefox         # headless
+pnpm test:firefox:headed  # with visible browser UI
+```
+
+### Traces
+
+Tests retry once locally and twice on CI. A trace file is recorded on the first retry of any failing test (`trace: 'on-first-retry'`). Open it with:
+
+```bash
+pnpm exec playwright show-trace test-results/<test-name>/trace.zip
+```
+
+Traces are also viewable inside the HTML report (`pnpm exec playwright show-report`) via the test detail page.
+
 ## Environment variables
 
 | Variable | Default | Description |
