@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
-const TEST_USERNAME = process.env.TEST_USERNAME ?? 'demo_user';
-const TEST_PASSWORD = process.env.TEST_PASSWORD ?? 'demo_password';
+const TEST_USERNAME = process.env.TEST_USERNAME ?? 'demo';
+const TEST_PASSWORD = process.env.TEST_PASSWORD ?? 'demo';
 
 test.describe('Auth smoke tests', () => {
   test('sign up with unique username', async ({ page }) => {
@@ -28,6 +28,7 @@ test.describe('Auth smoke tests', () => {
     await page.fill('#loginusername', TEST_USERNAME);
     await page.fill('#loginpassword', TEST_PASSWORD);
     await page.click('#logInModal button.btn-primary');
+    
 
     await expect(page.locator('#nameofuser')).toBeVisible({ timeout: 10000 });
     await expect(page.locator('#nameofuser')).toContainText('Welcome');
