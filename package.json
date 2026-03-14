@@ -5,6 +5,8 @@
   "packageManager": "pnpm@latest",
   "scripts": {
     "test": "playwright test",
+    "test:chrome": "playwright test --project=chromium",
+    "test:chrome:headed": "playwright test --project=chromium --headed",
     "test:firefox": "playwright test --project=firefox",
     "test:firefox:headed": "playwright test --project=firefox --headed",
     "test:headed": "playwright test --headed",

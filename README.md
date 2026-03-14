@@ -47,9 +47,11 @@ Run a single browser only:
 pnpm exec playwright test --project=chromium
 ```
 
-Firefox shortcuts:
+Browser shortcuts:
 
 ```bash
+pnpm test:chrome          # headless
+pnpm test:chrome:headed   # with visible browser UI
 pnpm test:firefox         # headless
 pnpm test:firefox:headed  # with visible browser UI
 ```
